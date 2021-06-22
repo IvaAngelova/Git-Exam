@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Git.Data.Migrations
 {
     [DbContext(typeof(GitDbContext))]
-    [Migration("20210622104059_UserRepositoryCommitTables")]
+    [Migration("20210622124420_UserRepositoryCommitTables")]
     partial class UserRepositoryCommitTables
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -103,15 +103,15 @@ namespace Git.Data.Migrations
             modelBuilder.Entity("Git.Data.Models.Commit", b =>
                 {
                     b.HasOne("Git.Data.Models.User", "Creator")
-                        .WithMany()
+                        .WithMany("Commits")
                         .HasForeignKey("CreatorId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("Git.Data.Models.Repository", "Repository")
-                        .WithMany()
+                        .WithMany("Commits")
                         .HasForeignKey("RepositoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Creator");
@@ -122,12 +122,24 @@ namespace Git.Data.Migrations
             modelBuilder.Entity("Git.Data.Models.Repository", b =>
                 {
                     b.HasOne("Git.Data.Models.User", "Owner")
-                        .WithMany()
+                        .WithMany("Repositories")
                         .HasForeignKey("OwnerId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Owner");
+                });
+
+            modelBuilder.Entity("Git.Data.Models.Repository", b =>
+                {
+                    b.Navigation("Commits");
+                });
+
+            modelBuilder.Entity("Git.Data.Models.User", b =>
+                {
+                    b.Navigation("Commits");
+
+                    b.Navigation("Repositories");
                 });
 #pragma warning restore 612, 618
         }

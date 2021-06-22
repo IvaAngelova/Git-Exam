@@ -19,7 +19,7 @@ namespace Git.Data.Models
         [Required]
         public DateTime CreatedOn { get; set; }
             = DateTime.UtcNow;
-        
+
         [Required]
         public bool IsPublic { get; set; }
 
@@ -28,7 +28,7 @@ namespace Git.Data.Models
 
         public User Owner { get; set; }
 
-        IEnumerable<Commit> Commits { get; set; }
-            = new List<Commit>();
+        public IEnumerable<Commit> Commits { get; set; }
+             = new List<Commit>();
     }
 }

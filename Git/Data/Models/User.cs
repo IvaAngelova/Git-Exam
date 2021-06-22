@@ -23,10 +23,10 @@ namespace Git.Data.Models
         [MinLength(DataConstants.PassowrdMinLength)]
         public string Password { get; set; }
 
-        IEnumerable<Repository> Repositories { get; set; }
+        public IEnumerable<Repository> Repositories { get; set; }
             = new List<Repository>();
 
-        IEnumerable<Commit> Commits { get; set; }
-            = new List<Commit>();
+        public IEnumerable<Commit> Commits { get; set; }
+             = new List<Commit>();
     }
 }
