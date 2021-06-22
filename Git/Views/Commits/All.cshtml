@@ -13,19 +13,31 @@
                                 <th scope="col">Repository</th>
                                 <th scope="col">Description</th>
                                 <th scope="col">Created On</th>
-                                <th scope="col">Delete</th>
+
+                                @if (User != null)
+                                {
+                                    <th scope="col">Delete</th>
+                                }
 
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach (var commit in Model)
+                            {
                             <tr class="table-light">
-                                <th scope="row">ASP.NET Core Template</th>
-                                <td>Introduce new functionality</td>
-                                <td>22/10/2020 08:45</td>
-                                <td>
-                                    <a class="btn btn-block btn-primary text-white mb-3" href="/Commits/Delete">Delete</a>
-                                </td>
+                                <th scope="row">@commit.Repository</th>
+                                <td>@commit.Description</td>
+                                <td>@commit.CreatedOn</td>
+
+                                @if (User != null)
+                                {
+                                    <td>
+                                        <a class="btn btn-block btn-primary text-white mb-3" href="/Commits/Delete?id=@commit.Id">Delete</a>
+                                    </td>
+                                }
+
                             </tr>
+                            }
                         </tbody>
                     </table>
                 </div>

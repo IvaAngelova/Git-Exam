@@ -53,6 +53,7 @@ namespace Git.Controllers
             return View(repositores);
         }
 
+        [Authorize]
         public HttpResponse Create()
         {
             if (this.User.IsAuthenticated)
